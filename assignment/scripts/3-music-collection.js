@@ -15,8 +15,10 @@ function addToCollection (title, artist, yearPublished ){
     }
     collection.push(newAlbum);
     return newAlbum;
-}
-/*- Test the `addToCollection` function:
+};
+
+/*
+- Test the `addToCollection` function:
   - Add 6 albums to your collection. Aim to have a mix of both same and different artists and published years. (Feel free to share your musical interests, or make stuff up. Totally fine either way.)
   - Console.log each album as added using the returned value.
   - After all are added, console.log the `collection` array.
@@ -42,7 +44,7 @@ console.log('There are', collection.length, 'albums in the collection. Albums in
 function showCollection( collectionToDisplay ){
     console.log('There are', collectionToDisplay.length, 'albums in my collection.')
     for( let i=0; i<collectionToDisplay.length; i++ ){
-        console.log('Album', i+1, 'is', collectionToDisplay[i].albumTitle, 'by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
+        console.log('Album', i+1, 'is \"' + collectionToDisplay[i].albumTitle + '\" by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
     } // end for loop
 } // end showCollection function
 
@@ -73,8 +75,6 @@ console.log('A search for Prince and the Revolution finds:', findByArtist('Princ
 console.log('A search for Fleetwood Mac finds:', findByArtist('Fleetwood Mac'));
 console.log('A search for The Beatles finds:', findByArtist('The Beatles'));
 console.log('A search for Brittney Spears finds:', findByArtist('Brittney Spears'));
-
-// > When testing your functions, write all tests in the JavaScript file!
 
 
 // ### Stretch goals
