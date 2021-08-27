@@ -79,29 +79,72 @@ console.log('A search for Brittney Spears finds:', findByArtist('Brittney Spears
 
 // ### Stretch goals
 
-// - Create a function called `search`. This function should:
-//   - Take an input parameter for a search criteria object. Create your solution based on a search object that has these properties:
-//   ```
-//   { artist: 'Ray Charles', year: 1957 }
-//   ```
-//   - The returned output from `search` should meet these requirements:
-//     - Return a new array of all items in the `collection` matching *all* of the search criteria.
-//     - If no results are found, return an empty array.
-//     - If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
+/*- Create a function called `search`. This function should:
+  - Take an input parameter for a search criteria object. Create your solution based on a search object that has these properties:
+  ```
+  { artist: 'Ray Charles', year: 1957 }
+  ```
+  - The returned output from `search` should meet these requirements:
+    - Return a new array of all items in the `collection` matching *all* of the search criteria.
+    - If no results are found, return an empty array.
+    - If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
+*/
+let allSearchResults = [];
+let exactSearchResults = [];
+let partialSearchResults = [];
 
-// - Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
-//   - Update the `addToCollection` function to also take an input parameter for the array of tracks.
-//   - Update `search` to allow a `trackName` search criteria.
-//   - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
-// ```
-//     TITLE by ARTIST, published in YEAR:
-//     1. NAME: DURATION
-//     2. NAME: DURATION
-//     3. NAME: DURATION
-//     TITLE by ARTIST, published in YEAR:
-//     1. NAME: DURATION
-//     2. NAME: DURATION
-// ```
+function search( searchArtist, searchAlbumYear ){
+if ( searchArtist === '' && searchAlbumYear === '' ){
+    console.log('No search criteria provided. Showing all items in collection', collection )
+}
+else{    
+    for (let i = 0; i < collection.length; i++) {
+       if (collection[i].albumAtist === searchArtist && collection[i].albumYear === searchAlbumYear ){
+        exactSearchResults.push(collection[i])   
+        allSearchResults.push(collection[i])
+       }  // end if
+       else if(collection[i].albumAtist === searchArtist || collection[i].albumYear === searchAlbumYear ){
+        partialSearchResults.push(collection[i])   
+        allSearchResults.push(collection[i])
+        } // end else if
+    }// end for loop 
+    if(exactSearchResults.length > 0 && partialSearchResults.length === 0){
+        console.log(exactSearchResults.length, 'Exact matches found!', allSearchResults );
+    }
+    else if(exactSearchResults.length === 0 && partialSearchResults.length > 0){
+        console.log(partialSearchResults.length, 'Partial matches found!', allSearchResults );
+    }
+    else if(exactSearchResults.length > 0 && partialSearchResults.length > 0){
+        console.log(exactSearchResults.length, 'Exact matches found! And', partialSearchResults.length, 'partial matches found!', allSearchResults );
+    }
+    else{
+        console.log('No matches found.', allSearchResults ); 
+        } // end else if
+    allSearchResults = [];
+    exactSearchResults = [];
+    partialSearchResults = [];
+    }
+} // end search function
+
+search('Lauryn Hill', 1998); // expected exact match
+search('Bob Dylan', 1979);  // expected partial match
+search('Monkey\'s', 1937); // no match found. 
+search('Joni Mitchell', 1971) // one exact match and one partial
+search('', '' ); // no criteria provided, all results shown. 
+
+/*- Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
+  - Update the `addToCollection` function to also take an input parameter for the array of tracks.
+  - Update `search` to allow a `trackName` search criteria.
+  - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
+```
+    TITLE by ARTIST, published in YEAR:
+    1. NAME: DURATION
+    2. NAME: DURATION
+    3. NAME: DURATION
+    TITLE by ARTIST, published in YEAR:
+    1. NAME: DURATION
+    2. NAME: DURATION
+*/
 
 // > Make sure to test all your code!
 
