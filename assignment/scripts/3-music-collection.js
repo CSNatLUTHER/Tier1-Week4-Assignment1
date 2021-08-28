@@ -1,5 +1,6 @@
 // - Create a variable `collection` that starts as an empty array.
-var collection  = [];
+let collection  = [];
+// DEFINE ARRAY TO HOLD TRACKS UNTIL PUSHED INTO ALBUM OBJECTS
 let tracksArray = [];
 /*- Add a function named `addToCollection`. This function should:
   - Take in the album's `title`, `artist`, `yearPublished` as input parameters
@@ -13,16 +14,15 @@ function addToCollection (title, artist, yearPublished ){
         albumAtist: artist,
         albumYear: Number(yearPublished),
         albumTracks: tracksArray
-    }
+    } // end newAlbum object
     collection.push(newAlbum);
     return newAlbum;
-};
+} // end addToCollection function
 
-/*
-- Test the `addToCollection` function:
-  - Add 6 albums to your collection. Aim to have a mix of both same and different artists and published years. (Feel free to share your musical interests, or make stuff up. Totally fine either way.)
-  - Console.log each album as added using the returned value.
-  - After all are added, console.log the `collection` array.
+/*- Test the `addToCollection` function:
+Add 6 albums to your collection. Aim to have a mix of both same and different artists and published years. (Feel free to share your musical interests, or make stuff up. Totally fine either way.)
+Console.log each album as added using the returned value.
+After all are added, console.log the `collection` array.
 */
 
 console.log('Album added:', addToCollection('The Miseducaiton of Lauryn Hill', 'Lauryn Hill', 1998));
@@ -36,7 +36,10 @@ console.log('Album added:', addToCollection('Blue', 'Joni Mitchell', 1971));
 console.log('Album added:', addToCollection('Pet Sounds', 'The Beach Boys', 1966));
 console.log('Album added:', addToCollection('What\'s Going On', 'Marvin Gaye', 1971));
 
-console.log('There are', collection.length, 'albums in the collection. Albums in collection are:', collection );
+//  CONSOLE LOG THE COLLECTION
+console.log('There are', collection.length, 'albums in the collection.');
+console.log('   Albums in collection are:', collection)
+
 /*- Add a function named `showCollection`. This function should:
   - Take in an array parameter. (This allows it to be reused to show any collection, like the results from the find or search.)
   - Console.log the number of items in the array.
@@ -45,11 +48,11 @@ console.log('There are', collection.length, 'albums in the collection. Albums in
 function showCollection( collectionToDisplay ){
     console.log('There are', collectionToDisplay.length, 'albums in my collection.')
     for( let i=0; i<collectionToDisplay.length; i++ ){
-        console.log('Album', i+1, 'is \"' + collectionToDisplay[i].albumTitle + '\" by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
+        console.log('   Album', i+1, 'is \"' + collectionToDisplay[i].albumTitle + '\" by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
     } // end for loop
 } // end showCollection function
 
-// - Test the `showCollection` function.
+// TEST SHOW COLLECTION FUNCTION
 showCollection( collection );
 
 /*- Add a function named `findByArtist`. This function should:
@@ -68,7 +71,7 @@ function findByArtist ( artist ){
     return results;
 } // end findByArtist
 
-// - Test the `findByArtist` function. Make sure to test with an artist you know is in the collection, as well as an artist you know is not in your collection. Check that for artists with multiple matches, all are found.
+// TEST FIND BY ARTEST FUNCTION
 console.log('A search for Nirvana finds:', findByArtist('Nirvana'));
 console.log('A search for Lauryn Hill finds:', findByArtist('Lauryn Hill'));
 console.log('A search for Bob Dylan finds:', findByArtist('Bob Dylan'));
@@ -91,14 +94,14 @@ console.log('A search for Brittney Spears finds:', findByArtist('Brittney Spears
     - If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
 */
 
-
-function search( searchArtist, searchAlbumYear, searchAlbumTrack ){
+// CREATE FUNCTION TO SERACH FOR ARTIST AND/OR ALBUM YEAR
+function search( searchArtist, searchAlbumYear ){
     let results = {
         allSearchResults : [],
         exactSearchResults : [],
         partialSearchResults : []
         } // end results object
-    if ( !searchArtist && !searchAlbumYear && !searchAlbumTrack ){
+    if ( !searchArtist && !searchAlbumYear ){
     console.log('No search criteria was provided. Showing all items in collection', collection )
     }
     else{    
@@ -127,13 +130,18 @@ function search( searchArtist, searchAlbumYear, searchAlbumTrack ){
     }; // end else
 }; // end search function
 
+// TEST SEARCH FUNCTION
 search('Lauryn Hill', 1998 ); // expected exact match
 search('Bob Dylan', 1979 );  // expected partial match
 search('Monkey\'s', 1937 ); // no match found. 
 search('Joni Mitchell', 1971 ); // one exact match and one partial
 search (); // no search criteria provided, all results shown. 
 
-/*- Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:*/
+/*- Add an array of `tracks` to your album objects. 
+    Each track should have a `name` and `duration`. 
+    You will need to update the functions to support this new property:*/
+
+// CREATE A FUNCITON TO COLLECT ALBUM TRACKS DETAILS
 function createTrackList ( name , duration ){
     let songDetails = {
         songTitle: name,
@@ -142,6 +150,7 @@ function createTrackList ( name , duration ){
     tracksArray.push(songDetails)
 } // end createTrackList
 
+// PUSH COLLECTED TRACK TITLES AND DURATIONS TO SELECTED ALBUM
 function addTrackstoAlbum ( albumName ){
     for (let i = 0; i < collection.length; i++) {
        if( collection[i].albumTitle === albumName ){
@@ -255,7 +264,8 @@ function updatedShowCollection( collectionToDisplay ){
 
 updatedShowCollection ( collection );
 
-//   - Update the `addToCollection` function to also take an input parameter for the array of tracks. - SEE ABOVE
+//   - Update the `addToCollection` function to also take an input parameter for the array of tracks.
+//   - SEE ABOVE
 
 
 //   - Update `search` to allow a `trackName` search criteria.
@@ -292,34 +302,28 @@ function updatedSearch( searchArtist, searchAlbumYear, searchAlbumTrack ){
             } // end else if
         }// end for loop 
         if(results.exactSearchResults.length > 0 && results.partialSearchResults.length === 0){
-            console.log(results.exactSearchResults.length, 'Exact matches found for', searchArtist + ',', searchAlbumYear, '& "' + searchAlbumTrack +'"!', results.allSearchResults );
+            console.log(results.exactSearchResults.length, 'Exact matches found for', searchArtist + ',', searchAlbumYear, '&', '"' + searchAlbumTrack +'"!', results.allSearchResults );
         } // end if
         else if(results.exactSearchResults.length === 0 && results.partialSearchResults.length > 0){
-            console.log(results.partialSearchResults.length, 'Partial matches found for', searchArtist + ',', searchAlbumYear, '& "' + searchAlbumTrack +'"!', results.allSearchResults );
+            console.log(results.partialSearchResults.length, 'Partial matches found for', searchArtist + ',', searchAlbumYear, '&', '"' + searchAlbumTrack +'"!', results.allSearchResults );
         } // end else if
         else if(results.exactSearchResults.length > 0 && results.partialSearchResults.length > 0){
-            console.log(results.exactSearchResults.length, 'Exact matches matches found, and,', results.partialSearchResults.length, 'partial matches found for', searchArtist + ',', searchAlbumYear, '& "' + searchAlbumTrack +'"!', results.allSearchResults );
+            console.log(results.exactSearchResults.length, 'Exact matches matches found, and,', results.partialSearchResults.length, 'partial matches found for', searchArtist + ',', searchAlbumYear, '&', '"' + searchAlbumTrack +'"!', results.allSearchResults );
         } // end else if
         else{
-            console.log('No matches found for', searchArtist + ',', searchAlbumYear, 'or "' + searchAlbumTrack +'".', results.allSearchResults ); 
+            console.log('No matches found for', searchArtist + ',', searchAlbumYear, 'or', '"' + searchAlbumTrack +'".', results.allSearchResults ); 
             } // end else
     }; // end else
 }; // end search function
 
-
+// TEST UPDATED SEARCH FUNCTION
 updatedSearch('Lauryn Hill', 1998, 'Lost Ones'); // expected exact match
 updatedSearch('Bob Dylan', 1979, 'Idiot Wind');  // expected partial match
 updatedSearch('Monkey\'s', 1937, 'Hey, Hey'); // no match found. 
 updatedSearch('Joni Mitchell', 1971, 'Blue') // one exact match and one partial
 updatedSearch (); // no search criteria provided, all results shown. 
 
-
-
-
-
-// > Make sure to test all your code!
-
-
+// > Make sure to test all your code! - TESTED
 
 // ## Assignment Submission
 // Check in your repo, then turn in your work via the Prime Academy Assignment Application at http://primeacademy.io, as usual and don't hesitate to hit up the Slack channel as needed!
