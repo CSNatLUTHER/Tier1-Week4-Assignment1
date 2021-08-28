@@ -1,6 +1,6 @@
 // - Create a variable `collection` that starts as an empty array.
-let collection  = [];
-
+var collection  = [];
+let tracksArray = [];
 /*- Add a function named `addToCollection`. This function should:
   - Take in the album's `title`, `artist`, `yearPublished` as input parameters
   - Create a new object having the above properties
@@ -11,7 +11,8 @@ function addToCollection (title, artist, yearPublished ){
     let newAlbum = {
         albumTitle: title,
         albumAtist: artist,
-        albumYear: Number(yearPublished)
+        albumYear: Number(yearPublished),
+        albumTracks: tracksArray
     }
     collection.push(newAlbum);
     return newAlbum;
@@ -24,8 +25,8 @@ function addToCollection (title, artist, yearPublished ){
   - After all are added, console.log the `collection` array.
 */
 
-console.log('Album added:', addToCollection('Miseducaiton of Lauryn Hill', 'Lauryn Hill', 1998));
-console.log('Album added:', addToCollection('Blood on the Track', 'Bob Dylan', 1975));
+console.log('Album added:', addToCollection('The Miseducaiton of Lauryn Hill', 'Lauryn Hill', 1998));
+console.log('Album added:', addToCollection('Blood on the Tracks', 'Bob Dylan', 1975));
 console.log('Album added:', addToCollection('Purple Rain', 'Prince and the Revolution', 1984));
 console.log('Album added:', addToCollection('Rumors', 'Fleetwood Mac', 1977));
 console.log('Album added:', addToCollection('Nevermind', 'Nirvana', 1991));
@@ -132,19 +133,93 @@ search('Monkey\'s', 1937); // no match found.
 search('Joni Mitchell', 1971) // one exact match and one partial
 search (); // no search criteria provided, all results shown. 
 
-/*- Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
-  - Update the `addToCollection` function to also take an input parameter for the array of tracks.
-  - Update `search` to allow a `trackName` search criteria.
-  - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
-```
-    TITLE by ARTIST, published in YEAR:
-    1. NAME: DURATION
-    2. NAME: DURATION
-    3. NAME: DURATION
-    TITLE by ARTIST, published in YEAR:
-    1. NAME: DURATION
-    2. NAME: DURATION
-*/
+/*- Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:*/
+function createTrackList ( name , duration ){
+    let songDetails = {
+        songTitle: name,
+        duration : duration
+    } // end songDetails object
+    tracksArray.push(songDetails)
+} // end createTrackList
+
+function addTrackstoAlbum ( albumName ){
+    for (let i = 0; i < collection.length; i++) {
+       if( collection[i].albumTitle === albumName ){
+            collection[i].albumTracks = tracksArray
+       } // end if  
+    } // end for loop
+    tracksArray = [];
+}; // end addTrackstoAlbum
+
+//UPDATE LAURYN HILL ALBUM
+createTrackList('Intro', '0:47');
+createTrackList( 'Lost Ones', '5:33');
+createTrackList( 'Ex-Factor', '5:26');
+createTrackList( 'To Zion (feat. Carlos Santana)', '6:09');
+createTrackList( 'Doo Wop (That Thing)', '5:20');
+addTrackstoAlbum( 'The Miseducaiton of Lauryn Hill' );
+
+//UPDATE BOB DYLAN ALBUM
+createTrackList('Tangled Up In Blue', '5:40');
+createTrackList( 'Simple Twist of Fate', '4:17');
+createTrackList( 'You\'re a Big Girl Now', '4:34');
+createTrackList( 'Idiot Wind', '7:47');
+createTrackList( 'You\'re Gonna Make Me Lonesome When You Go', '2:55');
+addTrackstoAlbum( 'Blood on the Tracks' );
+
+
+//UPDATE PRINCE AND THE REVOLUTION ALBUM
+createTrackList('Let\'s Go Crazy', '4:40');
+createTrackList( 'Take Me With U', '3:54');
+createTrackList( 'The Beautiful Ones', '5:13');
+createTrackList( 'Computer Blue', '3:59');
+createTrackList( 'Darling Nikki', '4:14');
+addTrackstoAlbum( 'Purple Rain' );
+
+//UPDATE FLEETWOOD MAC ALBUM
+createTrackList('Second Hand News', '2:56');
+createTrackList( 'Dreams', '4:17');
+createTrackList( 'Never Going Back Again', '2:14');
+createTrackList( 'Don\'t Stop', '3:13');
+createTrackList( 'Go Your Own Way', '3:43');
+addTrackstoAlbum( 'Rumors' );
+
+//UPDATE NIRVANA ALBUM
+createTrackList('Smells LIke Teen Spirit', '5:01');
+createTrackList( 'In Bloom', '4:15');
+createTrackList( 'Come As You Are', '3:38');
+createTrackList( 'Breed', '3:04');
+createTrackList( 'Lithium', '4:17');
+addTrackstoAlbum( 'Nevermind' );
+
+console.log(collection[0]);
+
+
+function updatedShowCollection( collectionToDisplay ){
+    console.log('There are', collectionToDisplay.length, 'albums in my collection.')
+    for( let i=0; i<collectionToDisplay.length; i++ ){
+        console.log('Album', i+1, 'is \"' + collectionToDisplay[i].albumTitle + '\" by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
+        for (let j = 0; j < collectionToDisplay[i].albumTracks.length; j++) {
+            console.log( 'Title', j+1 + ':', collectionToDisplay[i].albumTracks[j])
+            
+        } // end for loop 1
+        } // end for loop 2
+} // end updatedShowCollection function
+
+updatedShowCollection ( collection );
+
+//   - Update the `addToCollection` function to also take an input parameter for the array of tracks.
+//   - Update `search` to allow a `trackName` search criteria.
+//   - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
+// ```
+//     TITLE by ARTIST, published in YEAR:
+//     1. NAME: DURATION
+//     2. NAME: DURATION
+//     3. NAME: DURATION
+//     TITLE by ARTIST, published in YEAR:
+//     1. NAME: DURATION
+//     2. NAME: DURATION
+
 
 // > Make sure to test all your code!
 
@@ -152,4 +227,3 @@ search (); // no search criteria provided, all results shown.
 
 // ## Assignment Submission
 // Check in your repo, then turn in your work via the Prime Academy Assignment Application at http://primeacademy.io, as usual and don't hesitate to hit up the Slack channel as needed!
-
