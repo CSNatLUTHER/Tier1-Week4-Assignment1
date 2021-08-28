@@ -89,48 +89,48 @@ console.log('A search for Brittney Spears finds:', findByArtist('Brittney Spears
     - If no results are found, return an empty array.
     - If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
 */
-let allSearchResults = [];
-let exactSearchResults = [];
-let partialSearchResults = [];
+
 
 function search( searchArtist, searchAlbumYear ){
-if ( searchArtist === '' && searchAlbumYear === '' ){
-    console.log('No search criteria provided. Showing all items in collection', collection )
-}
-else{    
-    for (let i = 0; i < collection.length; i++) {
-       if (collection[i].albumAtist === searchArtist && collection[i].albumYear === searchAlbumYear ){
-        exactSearchResults.push(collection[i])   
-        allSearchResults.push(collection[i])
-       }  // end if
-       else if(collection[i].albumAtist === searchArtist || collection[i].albumYear === searchAlbumYear ){
-        partialSearchResults.push(collection[i])   
-        allSearchResults.push(collection[i])
+    let results = {
+        allSearchResults : [],
+        exactSearchResults : [],
+        partialSearchResults : []
+        } // end results object
+    if ( !searchArtist && !searchAlbumYear ){
+    console.log('No search criteria was provided. Showing all items in collection', collection )
+    }
+    else{    
+        for (let i = 0; i < collection.length; i++) {
+        if (collection[i].albumAtist === searchArtist && collection[i].albumYear === searchAlbumYear ){
+            results.exactSearchResults.push(collection[i])   
+            results.allSearchResults.push(collection[i])
+        }  // end if
+        else if(collection[i].albumAtist === searchArtist || collection[i].albumYear === searchAlbumYear ){
+            results.partialSearchResults.push(collection[i])   
+            results.allSearchResults.push(collection[i])
+            } // end else if
+        }// end for loop 
+        if(results.exactSearchResults.length > 0 && results.partialSearchResults.length === 0){
+            console.log(results.exactSearchResults.length, 'Exact matches found for', searchArtist, '&', searchAlbumYear +'!', results.allSearchResults );
+        } // end if
+        else if(results.exactSearchResults.length === 0 && results.partialSearchResults.length > 0){
+            console.log(results.partialSearchResults.length, 'Partial matches found for', searchArtist, '&', searchAlbumYear +'!', results.allSearchResults );
         } // end else if
-    }// end for loop 
-    if(exactSearchResults.length > 0 && partialSearchResults.length === 0){
-        console.log(exactSearchResults.length, 'Exact matches found!', allSearchResults );
-    }
-    else if(exactSearchResults.length === 0 && partialSearchResults.length > 0){
-        console.log(partialSearchResults.length, 'Partial matches found!', allSearchResults );
-    }
-    else if(exactSearchResults.length > 0 && partialSearchResults.length > 0){
-        console.log(exactSearchResults.length, 'Exact matches found! And', partialSearchResults.length, 'partial matches found!', allSearchResults );
-    }
-    else{
-        console.log('No matches found.', allSearchResults ); 
+        else if(results.exactSearchResults.length > 0 && results.partialSearchResults.length > 0){
+            console.log(results.exactSearchResults.length, 'Exact matches matches found, and,', results.partialSearchResults.length, 'partial matches found for', searchArtist, '&', searchAlbumYear +'!', results.allSearchResults );
         } // end else if
-    allSearchResults = [];
-    exactSearchResults = [];
-    partialSearchResults = [];
-    }
-} // end search function
+        else{
+            console.log('No matches found for', searchArtist, '&', searchAlbumYear +'.', results.allSearchResults ); 
+            } // end else
+    }; // end else
+}; // end search function
 
 search('Lauryn Hill', 1998); // expected exact match
 search('Bob Dylan', 1979);  // expected partial match
 search('Monkey\'s', 1937); // no match found. 
 search('Joni Mitchell', 1971) // one exact match and one partial
-search('', '' ); // no criteria provided, all results shown. 
+search (); // no search criteria provided, all results shown. 
 
 /*- Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
   - Update the `addToCollection` function to also take an input parameter for the array of tracks.
