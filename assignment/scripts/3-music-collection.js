@@ -92,24 +92,24 @@ console.log('A search for Brittney Spears finds:', findByArtist('Brittney Spears
 */
 
 
-function search( searchArtist, searchAlbumYear ){
+function search( searchArtist, searchAlbumYear, searchAlbumTrack ){
     let results = {
         allSearchResults : [],
         exactSearchResults : [],
         partialSearchResults : []
         } // end results object
-    if ( !searchArtist && !searchAlbumYear ){
+    if ( !searchArtist && !searchAlbumYear && !searchAlbumTrack ){
     console.log('No search criteria was provided. Showing all items in collection', collection )
     }
     else{    
         for (let i = 0; i < collection.length; i++) {
-        if (collection[i].albumAtist === searchArtist && collection[i].albumYear === searchAlbumYear ){
-            results.exactSearchResults.push(collection[i])   
-            results.allSearchResults.push(collection[i])
-        }  // end if
-        else if(collection[i].albumAtist === searchArtist || collection[i].albumYear === searchAlbumYear ){
-            results.partialSearchResults.push(collection[i])   
-            results.allSearchResults.push(collection[i])
+            if (collection[i].albumAtist === searchArtist && collection[i].albumYear === searchAlbumYear ){
+                        results.exactSearchResults.push(collection[i])   
+                        results.allSearchResults.push(collection[i])
+            }  // end if
+            else if(collection[i].albumAtist === searchArtist || collection[i].albumYear === searchAlbumYear ){
+                results.partialSearchResults.push(collection[i])   
+                results.allSearchResults.push(collection[i])
             } // end else if
         }// end for loop 
         if(results.exactSearchResults.length > 0 && results.partialSearchResults.length === 0){
@@ -119,18 +119,18 @@ function search( searchArtist, searchAlbumYear ){
             console.log(results.partialSearchResults.length, 'Partial matches found for', searchArtist, '&', searchAlbumYear +'!', results.allSearchResults );
         } // end else if
         else if(results.exactSearchResults.length > 0 && results.partialSearchResults.length > 0){
-            console.log(results.exactSearchResults.length, 'Exact matches matches found, and,', results.partialSearchResults.length, 'partial matches found for', searchArtist, '&', searchAlbumYear +'!', results.allSearchResults );
+            console.log(results.exactSearchResults.length, 'Exact matches matches found and', results.partialSearchResults.length, 'partial matches found for', searchArtist, '&', searchAlbumYear + '!', results.allSearchResults );
         } // end else if
         else{
-            console.log('No matches found for', searchArtist, '&', searchAlbumYear +'.', results.allSearchResults ); 
+            console.log('No matches found for', searchArtist, 'or', searchAlbumYear +'.', results.allSearchResults ); 
             } // end else
     }; // end else
 }; // end search function
 
-search('Lauryn Hill', 1998); // expected exact match
-search('Bob Dylan', 1979);  // expected partial match
-search('Monkey\'s', 1937); // no match found. 
-search('Joni Mitchell', 1971) // one exact match and one partial
+search('Lauryn Hill', 1998 ); // expected exact match
+search('Bob Dylan', 1979 );  // expected partial match
+search('Monkey\'s', 1937 ); // no match found. 
+search('Joni Mitchell', 1971 ); // one exact match and one partial
 search (); // no search criteria provided, all results shown. 
 
 /*- Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:*/
@@ -152,7 +152,7 @@ function addTrackstoAlbum ( albumName ){
 }; // end addTrackstoAlbum
 
 //UPDATE LAURYN HILL ALBUM
-createTrackList('Intro', '0:47');
+createTrackList( 'Intro', '0:47');
 createTrackList( 'Lost Ones', '5:33');
 createTrackList( 'Ex-Factor', '5:26');
 createTrackList( 'To Zion (feat. Carlos Santana)', '6:09');
@@ -160,16 +160,15 @@ createTrackList( 'Doo Wop (That Thing)', '5:20');
 addTrackstoAlbum( 'The Miseducaiton of Lauryn Hill' );
 
 //UPDATE BOB DYLAN ALBUM
-createTrackList('Tangled Up In Blue', '5:40');
+createTrackList( 'Tangled Up In Blue', '5:40');
 createTrackList( 'Simple Twist of Fate', '4:17');
 createTrackList( 'You\'re a Big Girl Now', '4:34');
 createTrackList( 'Idiot Wind', '7:47');
 createTrackList( 'You\'re Gonna Make Me Lonesome When You Go', '2:55');
 addTrackstoAlbum( 'Blood on the Tracks' );
 
-
 //UPDATE PRINCE AND THE REVOLUTION ALBUM
-createTrackList('Let\'s Go Crazy', '4:40');
+createTrackList( 'Let\'s Go Crazy', '4:40');
 createTrackList( 'Take Me With U', '3:54');
 createTrackList( 'The Beautiful Ones', '5:13');
 createTrackList( 'Computer Blue', '3:59');
@@ -177,7 +176,7 @@ createTrackList( 'Darling Nikki', '4:14');
 addTrackstoAlbum( 'Purple Rain' );
 
 //UPDATE FLEETWOOD MAC ALBUM
-createTrackList('Second Hand News', '2:56');
+createTrackList( 'Second Hand News', '2:56');
 createTrackList( 'Dreams', '4:17');
 createTrackList( 'Never Going Back Again', '2:14');
 createTrackList( 'Don\'t Stop', '3:13');
@@ -185,22 +184,70 @@ createTrackList( 'Go Your Own Way', '3:43');
 addTrackstoAlbum( 'Rumors' );
 
 //UPDATE NIRVANA ALBUM
-createTrackList('Smells LIke Teen Spirit', '5:01');
+createTrackList( 'Smells LIke Teen Spirit', '5:01');
 createTrackList( 'In Bloom', '4:15');
 createTrackList( 'Come As You Are', '3:38');
 createTrackList( 'Breed', '3:04');
 createTrackList( 'Lithium', '4:17');
 addTrackstoAlbum( 'Nevermind' );
 
-console.log(collection[0]);
+//UPDATE BEATLES ALBUM
+createTrackList( 'Come Together', '4:18');
+createTrackList( 'Something', '3:02');
+createTrackList( 'Maxwell\'s Silver Hammer', '3:27');
+createTrackList( 'Oh! Darling', '3:27');
+createTrackList( 'Octopus\'s Garden', '4:17');
+addTrackstoAlbum( 'Abbey Road' );
 
+//UPDATE STEVIE WONDER ALBUM
+createTrackList( 'Love\'s in Need of Love Today', '7:05');
+createTrackList( 'Have a Talk With God', '2:42');
+createTrackList( 'Village Ghetto Land', '3:25');
+createTrackList( 'Contusion', '3:46');
+createTrackList( 'Sir Duke', '3:53');
+addTrackstoAlbum( 'Songs in the Key of Life' );
+
+//UPDATE JONI MITCHELL ALBUM
+createTrackList( 'All I Want', '3:34');
+createTrackList( 'My Old Man', '3:34');
+createTrackList( 'Little Green', '3:27');
+createTrackList( 'Carey', '3:02');
+createTrackList( 'Blue', '3:05');
+addTrackstoAlbum( 'Blue' );
+
+//UPDATE BEACH BOYS ALBUM
+createTrackList( 'Wouldn\'t It Be Nice', '2:34');
+createTrackList( 'You Still Believe In Me', '2:36');
+createTrackList( 'That\'s Not Me', '2:30');
+createTrackList( 'Don\'t Talk (Put Your Head On My Shoulder)', '2:58');
+createTrackList( 'I\'m Waiting for the Day', '3:07');
+addTrackstoAlbum( 'Pet Sounds' );
+
+//UPDATE MARVIN GAYE ALBUM
+createTrackList( 'What\'s Going On', '3:52');
+createTrackList( 'What\'s Happening Brother', '2:43');
+createTrackList( 'Flyin\' High (In the Friendly Sky)', '3:49');
+createTrackList( 'Save the Children', '4:02');
+createTrackList( 'God is Love', '1:41');
+addTrackstoAlbum( 'What\'s Going On' );
+
+/*  - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
+```
+    TITLE by ARTIST, published in YEAR:
+    1. NAME: DURATION
+    2. NAME: DURATION
+    3. NAME: DURATION
+    TITLE by ARTIST, published in YEAR:
+    1. NAME: DURATION
+    2. NAME: DURATION
+    */
 
 function updatedShowCollection( collectionToDisplay ){
     console.log('There are', collectionToDisplay.length, 'albums in my collection.')
     for( let i=0; i<collectionToDisplay.length; i++ ){
-        console.log('Album', i+1, 'is \"' + collectionToDisplay[i].albumTitle + '\" by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
+        console.log('Album', i+1, 'is: \"' + collectionToDisplay[i].albumTitle + '\" by', collectionToDisplay[i].albumAtist + ', published in', collectionToDisplay[i].albumYear + '.')
         for (let j = 0; j < collectionToDisplay[i].albumTracks.length; j++) {
-            console.log( 'Title', j+1 + ':', collectionToDisplay[i].albumTracks[j])
+            console.log( '  Title', j+1 + ':', collectionToDisplay[i].albumTracks[j].songTitle, ':', collectionToDisplay[i].albumTracks[j].duration)
             
         } // end for loop 1
         } // end for loop 2
@@ -208,17 +255,66 @@ function updatedShowCollection( collectionToDisplay ){
 
 updatedShowCollection ( collection );
 
-//   - Update the `addToCollection` function to also take an input parameter for the array of tracks.
+//   - Update the `addToCollection` function to also take an input parameter for the array of tracks. - SEE ABOVE
+
+
 //   - Update `search` to allow a `trackName` search criteria.
-//   - Update the `showCollection` function to display the list of tracks for each album with its name and duration.
-// ```
-//     TITLE by ARTIST, published in YEAR:
-//     1. NAME: DURATION
-//     2. NAME: DURATION
-//     3. NAME: DURATION
-//     TITLE by ARTIST, published in YEAR:
-//     1. NAME: DURATION
-//     2. NAME: DURATION
+function updatedSearch( searchArtist, searchAlbumYear, searchAlbumTrack ){
+    let results = {
+        allSearchResults : [],
+        exactSearchResults : [],
+        partialSearchResults : []
+        } // end results object
+    if ( !searchArtist && !searchAlbumYear && !searchAlbumTrack ){
+    console.log('No search criteria was provided. Showing all items in collection', collection )
+    }
+    else{    
+        for (let i = 0; i < collection.length; i++) {
+            if (collection[i].albumAtist === searchArtist && collection[i].albumYear === searchAlbumYear ){
+                for (let j = 0; j < collection[i].albumTracks.length; j++) {
+                    if( collection[i].albumTracks[j].songTitle === searchAlbumTrack){
+                        results.exactSearchResults.push(collection[i])   
+                        results.allSearchResults.push(collection[i])
+                    } // end if
+                } // end for
+            }  // end if
+            else if(collection[i].albumAtist === searchArtist || collection[i].albumYear === searchAlbumYear ){
+                results.partialSearchResults.push(collection[i])   
+                results.allSearchResults.push(collection[i])
+            } // end else if
+            else if(collection[i].albumAtist != searchArtist || collection[i].albumYear != searchAlbumYear ){
+                for (let j = 0; j < collection[i].albumTracks.length; j++) {
+                    if( collection[i].albumTracks[j].songTitle === searchAlbumTrack){
+                        results.partialSearchResults.push(collection[i])   
+                        results.allSearchResults.push(collection[i])
+                    } // end if
+                } // end for
+            } // end else if
+        }// end for loop 
+        if(results.exactSearchResults.length > 0 && results.partialSearchResults.length === 0){
+            console.log(results.exactSearchResults.length, 'Exact matches found for', searchArtist + ',', searchAlbumYear, '& "' + searchAlbumTrack +'"!', results.allSearchResults );
+        } // end if
+        else if(results.exactSearchResults.length === 0 && results.partialSearchResults.length > 0){
+            console.log(results.partialSearchResults.length, 'Partial matches found for', searchArtist + ',', searchAlbumYear, '& "' + searchAlbumTrack +'"!', results.allSearchResults );
+        } // end else if
+        else if(results.exactSearchResults.length > 0 && results.partialSearchResults.length > 0){
+            console.log(results.exactSearchResults.length, 'Exact matches matches found, and,', results.partialSearchResults.length, 'partial matches found for', searchArtist + ',', searchAlbumYear, '& "' + searchAlbumTrack +'"!', results.allSearchResults );
+        } // end else if
+        else{
+            console.log('No matches found for', searchArtist + ',', searchAlbumYear, 'or "' + searchAlbumTrack +'".', results.allSearchResults ); 
+            } // end else
+    }; // end else
+}; // end search function
+
+
+updatedSearch('Lauryn Hill', 1998, 'Lost Ones'); // expected exact match
+updatedSearch('Bob Dylan', 1979, 'Idiot Wind');  // expected partial match
+updatedSearch('Monkey\'s', 1937, 'Hey, Hey'); // no match found. 
+updatedSearch('Joni Mitchell', 1971, 'Blue') // one exact match and one partial
+updatedSearch (); // no search criteria provided, all results shown. 
+
+
+
 
 
 // > Make sure to test all your code!
