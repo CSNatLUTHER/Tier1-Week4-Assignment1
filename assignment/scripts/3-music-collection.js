@@ -25,16 +25,16 @@ Console.log each album as added using the returned value.
 After all are added, console.log the `collection` array.
 */
 
-console.log('Album added:', addToCollection('The Miseducaiton of Lauryn Hill', 'Lauryn Hill', 1998));
-console.log('Album added:', addToCollection('Blood on the Tracks', 'Bob Dylan', 1975));
-console.log('Album added:', addToCollection('Purple Rain', 'Prince and the Revolution', 1984));
-console.log('Album added:', addToCollection('Rumors', 'Fleetwood Mac', 1977));
-console.log('Album added:', addToCollection('Nevermind', 'Nirvana', 1991));
-console.log('Album added:', addToCollection('Abbey Road', 'The Beatles', 1969));
-console.log('Album added:', addToCollection('Songs in the Key of Life', 'Stevie Wonder', 1976));
-console.log('Album added:', addToCollection('Blue', 'Joni Mitchell', 1971));
-console.log('Album added:', addToCollection('Pet Sounds', 'The Beach Boys', 1966));
-console.log('Album added:', addToCollection('What\'s Going On', 'Marvin Gaye', 1971));
+console.log('Lauryn Hill Album added:', addToCollection('The Miseducaiton of Lauryn Hill', 'Lauryn Hill', 1998));
+console.log('Bob Dylyan Album added:', addToCollection('Blood on the Tracks', 'Bob Dylan', 1975));
+console.log('Prince Album added:', addToCollection('Purple Rain', 'Prince and the Revolution', 1984));
+console.log('Fleetwood Mac Album added:', addToCollection('Rumors', 'Fleetwood Mac', 1977));
+console.log('Nirvana Album added:', addToCollection('Nevermind', 'Nirvana', 1991));
+console.log('Beatles Album added:', addToCollection('Abbey Road', 'The Beatles', 1969));
+console.log('Stevie Wonder Album added:', addToCollection('Songs in the Key of Life', 'Stevie Wonder', 1976));
+console.log('Joni Mitchell Album added:', addToCollection('Blue', 'Joni Mitchell', 1971));
+console.log('Beach Boys Album added:', addToCollection('Pet Sounds', 'The Beach Boys', 1966));
+console.log('Marvin Gaye Album added:', addToCollection('What\'s Going On', 'Marvin Gaye', 1971));
 
 //  CONSOLE LOG THE COLLECTION
 console.log('There are', collection.length, 'albums in the collection.');
@@ -62,13 +62,21 @@ showCollection( collection );
   - Return the array with the matching results. If no results are found, return an empty array.
 */
 function findByArtist ( artist ){
-    let results = [];
+    let results = {
+            message : '',
+            foundItems: []
+        }   
     for(let i=0; i<collection.length; i++){
         if(collection[i].albumAtist === artist){
-            results.push(collection[i])
+            results.foundItems.push(collection[i])
+            results.message = "Nice! Something Found."
         } // end if
     } // end for loop
-    return results;
+    if (results.foundItems.length === 0){
+        results.message = "Sorry, No Results Found."
+    }
+    return results.foundItems;
+    // return [results.message, results.foundItems]; // DIDN'T LOVE HOW THIS RETURNED, BUT I WANTED THIS AFFECT
 } // end findByArtist
 
 // TEST FIND BY ARTEST FUNCTION
